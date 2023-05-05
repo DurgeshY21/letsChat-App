@@ -1,9 +1,15 @@
 import React, { useContext, useState } from "react";
-import Image from "../img/unnamed.png";
+import Img from "../img/add.png";
 import Attach from "../img/attach.png";
 import { AuthContext } from "../context/AuthContext";
 import { ChatContext } from "../context/ChatContext";
-import {arrayUnion, doc, serverTimestamp, Timestamp, updateDoc,} from "firebase/firestore";
+import {
+  arrayUnion,
+  doc,
+  serverTimestamp,
+  Timestamp,
+  updateDoc,
+} from "firebase/firestore";
 import { db, storage } from "../firebase";
 import { v4 as uuid } from "uuid";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
@@ -24,6 +30,7 @@ const Input = () => {
       uploadTask.on(
         (error) => {
           //TODO:Handle Error
+          console.log(error);
         },
         () => {
           getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
@@ -84,7 +91,7 @@ const Input = () => {
           onChange={(e) => setImg(e.target.files[0])}
         />
         <label htmlFor="file">
-          <img src={Image} alt="" />
+          <img src={Img} alt="" />
         </label>
         <button onClick={handleSend}>Send</button>
       </div>
